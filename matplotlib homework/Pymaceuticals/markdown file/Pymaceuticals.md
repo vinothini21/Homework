@@ -238,6 +238,18 @@ tumor_error_df.head()
 
 
 ```python
+type(drug_grouped )
+```
+
+
+
+
+    pandas.core.frame.DataFrame
+
+
+
+
+```python
 #Pivot table for Drug, Timepoint vs tumor volume
 z = pd.pivot_table(drug_grouped, index='Timepoint', columns='Drug')
 z
@@ -656,7 +668,7 @@ plt.show()
 ```
 
 
-![png](output_8_0.png)
+![png](output_9_0.png)
 
 
 
@@ -665,7 +677,7 @@ plt.show()
 combined_df.groupby("Drug")["Timepoint"].count()
 metastatic_response_df = combined_df.groupby(["Drug", "Timepoint"])
 metastatic_response_df_2 = metastatic_response_df["Metastatic Sites"].mean().to_frame()
-metastatic_response_df_2.head()
+metastatic_response_df_2.head(10)
 ```
 
 
@@ -700,7 +712,7 @@ metastatic_response_df_2.head()
   </thead>
   <tbody>
     <tr>
-      <th rowspan="5" valign="top">Capomulin</th>
+      <th rowspan="10" valign="top">Capomulin</th>
       <th>0</th>
       <td>0.000000</td>
     </tr>
@@ -719,6 +731,26 @@ metastatic_response_df_2.head()
     <tr>
       <th>20</th>
       <td>0.652174</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.818182</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>1.090909</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>1.181818</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>1.380952</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>1.476190</td>
     </tr>
   </tbody>
 </table>
@@ -766,7 +798,7 @@ metastatic_response_error_df.head()
   </thead>
   <tbody>
     <tr>
-      <th rowspan="5" valign="top">Capomulin</th>
+      <th rowspan="10" valign="top">Capomulin</th>
       <th>0</th>
       <td>0.000000</td>
     </tr>
@@ -785,6 +817,26 @@ metastatic_response_error_df.head()
     <tr>
       <th>20</th>
       <td>0.161621</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>0.181818</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>0.172944</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>0.169496</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>0.175610</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>0.202591</td>
     </tr>
   </tbody>
 </table>
@@ -998,17 +1050,17 @@ x_limit = 45
 plt.figure(figsize=(10,7))
 
 #Defining single drug
-error = metastatic_response_df_2.loc["Capomulin","Metastatic Sites"]
-capomulin = plt.errorbar(x_axis, metastatic_response_error_df.loc["Capomulin","Metastatic Sites"], yerr=error, fmt="o", color="red", ls="dashed", linewidth=1, alpha=1, capsize=3)
+error1 = metastatic_response_error_df.loc["Capomulin","Metastatic Sites"]
+capomulin1 = plt.errorbar(x_axis, metastatic_response_df_2.loc["Capomulin","Metastatic Sites"], yerr=error1, fmt="o", color="red", ls="dashed", linewidth=1, alpha=1, capsize=3)
 
-error = metastatic_response_df_2.loc["Infubinol","Metastatic Sites"]
-infubinol = plt.errorbar(x_axis, metastatic_response_error_df.loc["Infubinol","Metastatic Sites"], yerr=error, fmt="^", color="blue", ls="dashed", linewidth=1, alpha=1, capsize=3)
+error1 = metastatic_response_error_df.loc["Infubinol","Metastatic Sites"]
+infubinol1 = plt.errorbar(x_axis, metastatic_response_df_2.loc["Infubinol","Metastatic Sites"], yerr=error1, fmt="^", color="blue", ls="dashed", linewidth=1, alpha=1, capsize=3)
 
-error = metastatic_response_df_2.loc["Ketapril","Metastatic Sites"]
-ketapril = plt.errorbar(x_axis, metastatic_response_error_df.loc["Ketapril","Metastatic Sites"], yerr=error, fmt="s", color="green", ls="dashed", linewidth=1, alpha=1, capsize=3)
+error1 = metastatic_response_error_df.loc["Ketapril","Metastatic Sites"]
+ketapril1 = plt.errorbar(x_axis, metastatic_response_df_2.loc["Ketapril","Metastatic Sites"], yerr=error1, fmt="s", color="green", ls="dashed", linewidth=1, alpha=1, capsize=3)
 
-error = metastatic_response_df_2.loc["Placebo","Metastatic Sites"]
-placebo = plt.errorbar(x_axis, metastatic_response_error_df.loc["Placebo","Metastatic Sites"], yerr=error, fmt="D", color="black", ls="dashed", linewidth=1, alpha=1, capsize=3)
+error1 = metastatic_response_error_df.loc["Placebo","Metastatic Sites"]
+placebo1 = plt.errorbar(x_axis, metastatic_response_df_2.loc["Placebo","Metastatic Sites"], yerr=error1, fmt="D", color="black", ls="dashed", linewidth=1, alpha=1, capsize=3)
 
 #Axes limits
 plt.ylim(0, 4)
@@ -1021,12 +1073,12 @@ plt.ylabel("Metastatic Sites")
 plt.grid(linestyle="dashed")
 
 #Chart Legend 
-plt.legend((capomulin, infubinol, ketapril, placebo), ("Capomulin", "Infubinol", "Ketapril", "Placebo"), fontsize=12)
+plt.legend((capomulin1, infubinol1, ketapril1, placebo1), ("Capomulin", "Infubinol", "Ketapril", "Placebo"), fontsize=12)
 plt.show()
 ```
 
 
-![png](output_12_0.png)
+![png](output_13_0.png)
 
 
 
@@ -1040,6 +1092,64 @@ name_changed_df.head()
 ```
 
 
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Mouse Count</th>
+    </tr>
+    <tr>
+      <th>Drug</th>
+      <th>Timepoint</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">Capomulin</th>
+      <th>0</th>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>23</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
 ```python
 #Pivot table for Drug, Timepoint vs num. of mouse survived 
 k = pd.pivot_table(name_changed_df, index='Timepoint', columns='Drug')
@@ -1047,30 +1157,543 @@ k
 ```
 
 
-```python
-#x-axis
-x_axis = [0,5,10,15,20,25,30,35,40,45]
-x_limit = 45
-plt.figure(figsize=(10,10))
 
-#Axes limits
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">Mouse Count</th>
+    </tr>
+    <tr>
+      <th>Drug</th>
+      <th>Capomulin</th>
+      <th>Ceftamin</th>
+      <th>Infubinol</th>
+      <th>Ketapril</th>
+      <th>Naftisol</th>
+      <th>Placebo</th>
+      <th>Propriva</th>
+      <th>Ramicane</th>
+      <th>Stelasyn</th>
+      <th>Zoniferol</th>
+    </tr>
+    <tr>
+      <th>Timepoint</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25</td>
+      <td>25</td>
+      <td>25</td>
+      <td>25</td>
+      <td>25</td>
+      <td>25</td>
+      <td>26</td>
+      <td>25</td>
+      <td>26</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>25</td>
+      <td>21</td>
+      <td>25</td>
+      <td>23</td>
+      <td>23</td>
+      <td>24</td>
+      <td>25</td>
+      <td>25</td>
+      <td>25</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>25</td>
+      <td>20</td>
+      <td>21</td>
+      <td>22</td>
+      <td>21</td>
+      <td>24</td>
+      <td>23</td>
+      <td>24</td>
+      <td>23</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>24</td>
+      <td>19</td>
+      <td>21</td>
+      <td>19</td>
+      <td>21</td>
+      <td>20</td>
+      <td>17</td>
+      <td>24</td>
+      <td>23</td>
+      <td>21</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>23</td>
+      <td>18</td>
+      <td>20</td>
+      <td>19</td>
+      <td>20</td>
+      <td>19</td>
+      <td>17</td>
+      <td>23</td>
+      <td>21</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>22</td>
+      <td>18</td>
+      <td>18</td>
+      <td>19</td>
+      <td>18</td>
+      <td>17</td>
+      <td>14</td>
+      <td>23</td>
+      <td>19</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>22</td>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+      <td>15</td>
+      <td>15</td>
+      <td>13</td>
+      <td>23</td>
+      <td>18</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>22</td>
+      <td>14</td>
+      <td>12</td>
+      <td>17</td>
+      <td>15</td>
+      <td>14</td>
+      <td>10</td>
+      <td>21</td>
+      <td>16</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>21</td>
+      <td>14</td>
+      <td>10</td>
+      <td>15</td>
+      <td>15</td>
+      <td>12</td>
+      <td>9</td>
+      <td>20</td>
+      <td>12</td>
+      <td>14</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>21</td>
+      <td>13</td>
+      <td>9</td>
+      <td>11</td>
+      <td>13</td>
+      <td>11</td>
+      <td>7</td>
+      <td>20</td>
+      <td>11</td>
+      <td>14</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+#Creating the Plot
+plt.figure(figsize=(10,10))
+#For single drug
+capomulin2 = plt.errorbar(x_axis, (name_changed_df.loc["Capomulin", "Mouse Count"]/25*100), fmt="o", color="red", ls="dashed", linewidth=1, alpha=1, capsize=3)
+infubinol2 = plt.errorbar(x_axis, (name_changed_df.loc["Infubinol", "Mouse Count"]/25*100), fmt="^", color="blue", ls="dashed", linewidth=1, alpha=1, capsize=3)
+ketapril2 = plt.errorbar(x_axis, (name_changed_df.loc["Ketapril", "Mouse Count"]/25*100), fmt="s", color="green", ls="dashed", linewidth=1, alpha=1, capsize=3)
+placebo2 = plt.errorbar(x_axis, (name_changed_df.loc["Placebo", "Mouse Count"]/25*100), fmt="D", color="black", ls="dashed", linewidth=1, alpha=1, capsize=3)
+
+#Axes Limits
 plt.ylim(40, 100)
 plt.xlim(0, 45)
-
 #Axes and Chart Labels
-plt.title("Survival During treatment")
-plt.xlabel("Time (Days)")
-plt.ylabel("Survival Rate (%)")
+plt.title("Survival During Treatment", fontsize=20)
+plt.xlabel("Time (Days)", fontsize=14)
+plt.ylabel("Survival Rate (%)", fontsize=14)
 plt.grid(linestyle="dashed")
-
-#Chart Legend 
-plt.legend((capomulin, infubinol, ketapril, placebo), ("Capomulin", "Infubinol", "Ketapril", "Placebo"), fontsize=12)
+#Chart Legend
+plt.legend((capomulin2, infubinol2, ketapril2, placebo2), ("Capomulin","Infubinol", "Ketapril", "Placebo"), fontsize=12)
 plt.show()
 ```
 
 
+![png](output_16_0.png)
+
+
+
 ```python
-#Volume change
-
-
+u = drug_grouped.unstack(0)
+u
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="10" halign="left">Tumor Volume (mm3)</th>
+    </tr>
+    <tr>
+      <th>Drug</th>
+      <th>Capomulin</th>
+      <th>Ceftamin</th>
+      <th>Infubinol</th>
+      <th>Ketapril</th>
+      <th>Naftisol</th>
+      <th>Placebo</th>
+      <th>Propriva</th>
+      <th>Ramicane</th>
+      <th>Stelasyn</th>
+      <th>Zoniferol</th>
+    </tr>
+    <tr>
+      <th>Timepoint</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+      <td>45.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>44.266086</td>
+      <td>46.503051</td>
+      <td>47.062001</td>
+      <td>47.389175</td>
+      <td>46.796098</td>
+      <td>47.125589</td>
+      <td>47.248967</td>
+      <td>43.944859</td>
+      <td>47.527452</td>
+      <td>46.851818</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>43.084291</td>
+      <td>48.285125</td>
+      <td>49.403909</td>
+      <td>49.582269</td>
+      <td>48.694210</td>
+      <td>49.423329</td>
+      <td>49.101541</td>
+      <td>42.531957</td>
+      <td>49.463844</td>
+      <td>48.689881</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>42.064317</td>
+      <td>50.094055</td>
+      <td>51.296397</td>
+      <td>52.399974</td>
+      <td>50.933018</td>
+      <td>51.359742</td>
+      <td>51.067318</td>
+      <td>41.495061</td>
+      <td>51.529409</td>
+      <td>50.779059</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>40.716325</td>
+      <td>52.157049</td>
+      <td>53.197691</td>
+      <td>54.920935</td>
+      <td>53.644087</td>
+      <td>54.364417</td>
+      <td>53.346737</td>
+      <td>40.238325</td>
+      <td>54.067395</td>
+      <td>53.170334</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>39.939528</td>
+      <td>54.287674</td>
+      <td>55.715252</td>
+      <td>57.678982</td>
+      <td>56.731968</td>
+      <td>57.482574</td>
+      <td>55.504138</td>
+      <td>38.974300</td>
+      <td>56.166123</td>
+      <td>55.432935</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>38.769339</td>
+      <td>56.769517</td>
+      <td>58.299397</td>
+      <td>60.994507</td>
+      <td>59.559509</td>
+      <td>59.809063</td>
+      <td>58.196374</td>
+      <td>38.703137</td>
+      <td>59.826738</td>
+      <td>57.713531</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>37.816839</td>
+      <td>58.827548</td>
+      <td>60.742461</td>
+      <td>63.371686</td>
+      <td>62.685087</td>
+      <td>62.420615</td>
+      <td>60.350199</td>
+      <td>37.451996</td>
+      <td>62.440699</td>
+      <td>60.089372</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>36.958001</td>
+      <td>61.467895</td>
+      <td>63.162824</td>
+      <td>66.068580</td>
+      <td>65.600754</td>
+      <td>65.052675</td>
+      <td>63.045537</td>
+      <td>36.574081</td>
+      <td>65.356386</td>
+      <td>62.916692</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>36.236114</td>
+      <td>64.132421</td>
+      <td>65.755562</td>
+      <td>70.662958</td>
+      <td>69.265506</td>
+      <td>68.084082</td>
+      <td>66.258529</td>
+      <td>34.955595</td>
+      <td>68.438310</td>
+      <td>65.960888</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+#Summary
+summary_df=((u.iloc[9,:]-u.iloc[0,:])*100/u.iloc[0,:]).to_frame().rename(columns={0:"Percent Tumor Change"})
+summary_df
+```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>Percent Tumor Change</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>Drug</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="10" valign="top">Tumor Volume (mm3)</th>
+      <th>Capomulin</th>
+      <td>-19.475303</td>
+    </tr>
+    <tr>
+      <th>Ceftamin</th>
+      <td>42.516492</td>
+    </tr>
+    <tr>
+      <th>Infubinol</th>
+      <td>46.123472</td>
+    </tr>
+    <tr>
+      <th>Ketapril</th>
+      <td>57.028795</td>
+    </tr>
+    <tr>
+      <th>Naftisol</th>
+      <td>53.923347</td>
+    </tr>
+    <tr>
+      <th>Placebo</th>
+      <td>51.297960</td>
+    </tr>
+    <tr>
+      <th>Propriva</th>
+      <td>47.241175</td>
+    </tr>
+    <tr>
+      <th>Ramicane</th>
+      <td>-22.320900</td>
+    </tr>
+    <tr>
+      <th>Stelasyn</th>
+      <td>52.085134</td>
+    </tr>
+    <tr>
+      <th>Zoniferol</th>
+      <td>46.579751</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+```python
+#summary bar graph
+plt.figure(figsize=(6,6))
+
+#For 4 drugs
+capomulin3 = plt.bar(0, summary_df["Percent Tumor Change"][0], color='green', alpha=1, align="edge", ec="black", width=1)
+infubinol3 = plt.bar(1, summary_df["Percent Tumor Change"][2], color='red', alpha=1, align="edge", ec="black", width=1)
+ketapril3 = plt.bar(2, summary_df["Percent Tumor Change"][3], color='red', alpha=1, align="edge", ec="black", width=1)
+placebo3 = plt.bar(3, summary_df["Percent Tumor Change"][5], color='red', alpha=1, align="edge", ec="black", width=1)
+
+def label(graphs):
+ for graph in graphs:
+    height = graph.get_height()
+    plt.text(graph.get_x() + graph.get_width()/2., -8,'%d' % int(height) + "%", ha='center', va='bottom', color='white', fontsize=12)
+label(capomulin3)
+def label(graphs):
+ for graph in graphs:
+    height = graph.get_height()
+    plt.text(graph.get_x() + graph.get_width()/2., 2,'%d' % int(height) + "%",ha='center', va='bottom', color='white', fontsize=12)
+label(infubinol3)
+label(ketapril3)
+label(placebo3)
+#declare axis
+xvalues=["Capomulin", "Infubinol", "Ketapril", "Placebo"]
+x_axis1 = np.arange(0,len(xvalues),1)
+tick_locations = [value+0.5 for value in x_axis1]
+plt.xticks(tick_locations, (xvalues))
+plt.grid(linestyle="dashed")
+#Axes Limits
+plt.xlim(0, 4)
+plt.ylim(-22, 60)
+#Axes and Chart Labels
+plt.title("Tumor Change Over 45 Day Treatment", fontsize=12)
+plt.ylabel("% Tumor Volume Change")
+plt.show()
+```
+
+
+![png](output_19_0.png)
+
