@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>UFO Sightings</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -24,12 +24,14 @@
           
           <input type="text" class="form-control" id="shape" placeholder="Shape">
           <a id="search" class="btn btn-default">Search</a>
+          
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-12">
         <table class="table table-striped">
+            
           <thead>
             <tr>
               <th>Datetime</th>
@@ -46,9 +48,15 @@
         </table>
       </div>
     </div>
+  
+  
   </div>
+  <a href="javascript:prevPage()" id="btn_prev">Prev</a>
+          <a href="javascript:nextPage()" id="btn_next">Next</a>
+              page: <span id="page"></span>
   <script src="data.js" type="text/javascript"></script> 
   <script src="index.js" type="text/javascript"></script>
+
 </body>
 
 </html>

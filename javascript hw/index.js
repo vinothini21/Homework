@@ -7,6 +7,7 @@ var $countryInput = document.querySelector("#country");
 var $shapeInput = document.querySelector("#shape");
 var $searchBtn = document.querySelector("#search");
 
+
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
 
@@ -50,16 +51,77 @@ function handleSearchButtonClick() {
     var dataShape = data.shape.toLowerCase();
 
     // filtering the columns
-    var filteredFields =
+    var filteredFields = 
       (filterDatetime === "" || dataDatetime === filterDatetime) &&
       (filterCity === "" || dataCity === filterCity) &&
       (filterState === "" || dataState === filterState) &&
       (filterCountry === "" || dataCountry === filterCountry) &&
       (filterShape === "" || dataShape === filterShape);
     return filteredFields;
+    
   });
   renderTable();
 }
+// Making  20 records per page
 
+var current_page = 1;
+var records_per_page = 20;
+
+
+function prevPage()
+{
+    if (current_page > 1) {
+        current_page--;
+        changePage(current_page);
+    }
+}
+
+function nextPage()
+{
+    if (current_page < numPages()) {
+        current_page++;
+        changePage(current_page);
+    }
+}
+    
+function changePage(page)
+{
+    var btn_next = document.getElementById("btn_next");
+    var btn_prev = document.getElementById("btn_prev");
+    var listing_table = document.getElementsByClassName("row");
+    var page_span = document.getElementById("page");
+ 
+    // Validate page
+    if (page < 1) page = 1;
+    if (page > numPages()) page = numPages();
+
+    listing_table.innerHTML = "";
+
+    for (var i = (page-1) * records_per_page; i < (page * records_per_page) && i < dataSet.length; i++) {
+        listing_table.innerHTML += dataSet[i].dataCity + "<br>";
+    }
+    page_span.innerHTML = page + "/" + numPages();
+
+    if (page == 1) {
+        btn_prev.style.visibility = "hidden";
+    } else {
+        btn_prev.style.visibility = "visible";
+    }
+
+    if (page == numPages()) {
+        btn_next.style.visibility = "hidden";
+    } else {
+        btn_next.style.visibility = "visible";
+    }
+}
+
+function numPages()
+{
+    return Math.ceil(dataSet.length / records_per_page);
+}
+
+window.onload = function() {
+    changePage(1);
+};
 // Render the table for the first time on page load
 renderTable();
