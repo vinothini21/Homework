@@ -58,6 +58,9 @@ function handleSearchButtonClick() {
       (filterCountry === "" || dataCountry === filterCountry) &&
       (filterShape === "" || dataShape === filterShape);
     return filteredFields;
+
+    console.log(filteredFields);
+    console.log("I'm running")
     
   });
   renderTable();
