@@ -1,5 +1,5 @@
-var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+var margin = {top: 20, right: 40, bottom: 60, left: 100},
+    width = 1000 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 /* 
@@ -50,37 +50,40 @@ d3.csv("data.csv", function(error, data) {
   // don't want dots overlapping axis, so add in buffer to data domain
   xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
   yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
+ 
+  var currentAxisLabelX = "Income_100,000_or_more";
+  var currentAxisLabelY = "College_or_more";
   // x-axis
   svg.append("g")
       .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
+      .attr("transform", "translate(0," + height  + ")")
       .call(xAxis)
     .append("text")
-      .attr("class", "label")
-      .attr("x", width)
-      .attr("y", -6)
-      .style("text-anchor", "end")
-      .text("Income_100,000_or_more");
-
+      .attr("class", "x label")
+      .attr("x",  width/ 3)
+      .attr("y",  0 - margin.right + 80)
+      .text("Income 100,000+");
+      
   // y-axis
   svg.append("g")
       .attr("class", "y axis")
       .call(yAxis)
     .append("text")
-      .attr("class", "label")
+      .attr("class", "y label")
       .attr("transform", "rotate(-90)")
-      .attr("y", 6)
-      .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("College_or_more");
+      .attr("y",  0 - margin.left + 60)
+      .attr("dy", "1em")
+      .attr("x", 0 - height / 2)
+      .text("Atleast a degree");
 
   // draw dots
-  svg.selectAll(".dot")
+  svg.selectAll("circle")
       .data(data)
-    .enter().append("circle")
-      .attr("class", "dot")
-      .attr("r", 5)
+      .enter()
+      .append("circle")
+      .attr("class", "circle")
+      .attr("r", 9)
+      .attr("fill", "skyblue")
       .attr("cx", xMap)
       .attr("cy", yMap)
       //.style("fill", function(d) { return color(cValue(d));}) 
@@ -88,7 +91,7 @@ d3.csv("data.csv", function(error, data) {
           tooltip.transition()
                .duration(200)
                .style("opacity", .9);
-          tooltip.html(d["Cereal Name"] + "<br/> (" + xValue(d) 
+          tooltip.html(d["State"] + "<br/> (" + xValue(d) 
 	        + ", " + yValue(d) + ")")
                .style("left", (d3.event.pageX + 5) + "px")
                .style("top", (d3.event.pageY - 28) + "px");
@@ -98,20 +101,38 @@ d3.csv("data.csv", function(error, data) {
                .duration(500)
                .style("opacity", 0);
       });
+  svg.selectAll("circleText")
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("dx", function (data, index) {
+      return xScale(+data[currentAxisLabelX]) - 5
+    })
+    .attr("dy", function (data) {
+      return yScale(+data[currentAxisLabelY]) + 2
+    })
+    .text(function (data, index) {
+      return data.State;
+    })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "8px")
+    .style("fill", "red");
 
   // draw legend
   var legend = svg.selectAll(".legend")
       .data(color.domain())
     .enter().append("g")
       .attr("class", "legend")
-      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
+      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; })
+      
+      
   // draw legend colored rectangles
   legend.append("rect")
       .attr("x", width - 18)
       .attr("width", 18)
       .attr("height", 18)
-      .style("fill", color);
+      .style("fill", red);
+      
 
   // draw legend text
   legend.append("text")
@@ -121,3 +142,13 @@ d3.csv("data.csv", function(error, data) {
       .style("text-anchor", "end")
       .text(function(d) { return d;})
 });
+d3.select(window).on('resize', resize); 
+
+function resize() {
+    // update width
+    width = parseInt(d3.select('#chart').style('width'), 100);
+    width = width - margin.left - margin.right;
+    x.range([0, width]);
+
+    // do the actual resize...
+}
