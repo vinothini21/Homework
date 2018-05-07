@@ -40,7 +40,7 @@ var tooltip = d3.select("body").append("div")
 // load data
 d3.csv("data.csv", function(error, data) {
 
-  // change string (from CSV) into number format
+  //parse the data change string (from CSV) into number format
   data.forEach(function(d) {
     d.College_or_more = +d.College_or_more;
     d["Income_100,000_or_more"] = +d["Income_100,000_or_more"];
@@ -50,9 +50,9 @@ d3.csv("data.csv", function(error, data) {
   // don't want circle overlapping axis, so add in buffer to data domain
   xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
   yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
- 
-  var currentAxisLabelX = "Income_100,000_or_more";
-  var currentAxisLabelY = "College_or_more";
+ //Initial Parameters
+  var currentAxisX = "Income_100,000_or_more";
+  var currentAxisY = "College_or_more";
 
   // x-axis
   svg.append("g")
@@ -113,10 +113,10 @@ d3.csv("data.csv", function(error, data) {
     .enter()
     .append("text")
     .attr("dx", function (data, index) {
-      return xScale(+data[currentAxisLabelX]) - 5
+      return xScale(+data[currentAxisX]) - 5
     })
     .attr("dy", function (data) {
-      return yScale(+data[currentAxisLabelY]) + 2
+      return yScale(+data[currentAxisY]) + 2
     })
     .text(function (data, index) {
       return data.State;
