@@ -1,53 +1,53 @@
-State,College_or_more,"Income_100,000_or_more"
-AL,20.4,8.7
-AK,24.1,13.5
-AZ,23.9,10.6
-AR,18.2,6.8
-CA,27.3,17.2
-CO,33.4,13.7
-CT,32.9,20.4
-DE,26.1,12
-DC,49.1,28.2
-FL,24.1,9.3
-GA,24.7,11.1
-HI,27.3,9.5
-ID,22.4,8.5
-IL,28.4,13.8
-IN,20.8,8.3
-IA,23.4,7.9
-KS,27,9.7
-KY,19.3,7.5
-LA,19.8,9.8
-ME,25.6,7.6
-MD,33.3,19.1
-MA,35.5,19.9
-MI,23.4,11.1
-MN,29.6,13.1
-MS,18.1,6.6
-MO,23.8,8.8
-MT,26.2,7.5
-NE,25.8,8.1
-NV,19.9,8.5
-NH,31,15
-NJ,32.5,20.7
-NM,22.8,8.3
-NY,30.4,16.2
-NC,24.3,9.7
-ND,25,10.8
-OH,22.8,9.4
-OK,21,8.1
-OR,26.8,11.2
-PA,25.1,11.4
-RI,27.9,13.3
-SC,22.5,7.7
-SD,23.8,6.4
-TN,21.5,8.4
-TX,23.5,12.4
-UT,25.8,10.9
-VT,31.5,8.4
-VA,31.7,17.7
-WA,28.7,15.9
-WV,16.6,7.2
-WI,24.3,8.7
-WY,22.8,8.9
-PR,29.4,3.1
+State,stateName,College_or_more,"Income_100,000_or_more"
+AL,Alabama,20.4,8.7
+AK,Alaska,24.1,13.5
+AZ,Arizona,23.9,10.6
+AR,Arkansas,18.2,6.8
+CA,California,27.3,17.2
+CO,Colorado,33.4,13.7
+CT,Connecticut,32.9,20.4
+DE,Delaware,26.1,12
+DC,District of Columbia,49.1,28.2
+FL,Florida,24.1,9.3
+GA,Georgia,24.7,11.1
+HI,Hawaii,27.3,9.5
+ID,Idaho,22.4,8.5
+IL,Illinois,28.4,13.8
+IN,Indiana,20.8,8.3
+IA,Iowa,23.4,7.9
+KS,Kansas,27,9.7
+KY,Kentucky,19.3,7.5
+LA,Louisiana,19.8,9.8
+ME,Maine,25.6,7.6
+MD,Maryland,33.3,19.1
+MA,Massachusetts,35.5,19.9
+MI,Michigan,23.4,11.1
+MN,Minnesota,29.6,13.1
+MS,Mississippi,18.1,6.6
+MO,Missouri,23.8,8.8
+MT,Montana,26.2,7.5
+NE,Nebraska,25.8,8.1
+NV,Nevada,19.9,8.5
+NH,New Hampshire,31,15
+NJ,New Jersey,32.5,20.7
+NM,New Mexico,22.8,8.3
+NY,New York,30.4,16.2
+NC,North Carolina,24.3,9.7
+ND,North Dakota,25,10.8
+OH,Ohio,22.8,9.4
+OK,Oklahoma,21,8.1
+OR,Oregon,26.8,11.2
+PA,Pennsylvania,25.1,11.4
+RI,Rhode Island,27.9,13.3
+SC,South Carolina,22.5,7.7
+SD,South Dakota,23.8,6.4
+TN,Tennessee,21.5,8.4
+TX,Texas,23.5,12.4
+UT,Utah,25.8,10.9
+VT,Vermont,31.5,8.4
+VA,Virginia,31.7,17.7
+WA,Washington,28.7,15.9
+WV,West Virginia,16.6,7.2
+WI,Wisconsin,24.3,8.7
+WY,Wyoming,22.8,8.9
+PR,Puerto Rico,29.4,3.1
